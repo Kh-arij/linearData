@@ -1,0 +1,31 @@
+ALGORITHME problem1-solution1
+VAR
+    tab1: ARRAY_OF INTEGER [20];
+    tab2: ARRAY_OF INTEGER [20];
+    htab: HASH_TABLE <INTEGER, INTEGER>;
+    i, j, compte, somme: INTEGER;
+    
+COMMENCER
+    somme: = 0; // initialisation de la valeur de la somme.
+
+        // remplissage du tableau 1.
+    POUR i DE 0 À tab1.length -1 ÉTAPE 1 FAIRE
+        Lire (tab1 [i]);
+    END_FOR
+
+        // remplissage du tableau 2.
+    POUR j DE 0 À tab2.length -1 ÉTAPE 1 FAIRE
+        Lire (tab2 [j]);
+    END_FOR
+
+
+        // remplissage du tableau de hachage par les éléments dupliqués et distincts.
+    POUR i DE 0 À tab1.length -1 ÉTAPE 1 FAIRE
+        compte: = 1;
+        POUR j DE 0 À tab2.length -1 ÉTAPE 1 FAIRE
+            SI (tab1 [i] = tab2 [j]) ALORS
+                compter + = 1;
+            FIN SI
+        END_FOR
+        htab.insert (tab1 [i], nombre);
+    END_FOR
