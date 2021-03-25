@@ -1,46 +1,51 @@
 ALGORITHM problem1-solution2
-VAR
-    tab1 : ARRAY_OF INTEGER [30];
-    tab2 : ARRAY_OF INTEGER [30];
-    i , j , sum : INTEGER;
-    found : BOOLEAN;
-BEGIN
-        // remplissage du tableau 1.
-    FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+Var
+    tab1 : array-of integer [30];
+    tab2 : array-of integer [30];
+    htab : hash_table<integer,integer>;
+    i , j , count , sum : integer;
+    
+Begin
+    sum := 0 ;  
+    for i from 0 to tab1.length -1 do
         Read (tab1[i]);
-    END_FOR
+    end-for
 
-        // remplissage du tableau 2.
-    FOR j FROM 0 TO tab2.length -1 STEP 1  DO
+    for j from 0 to tab2.length -1 do
         Read (tab2[j]);
-    END_FOR
+    end-for
+    for i from 0 to tab1.length -1 do
+        count := 1;
+        for j from 0 to tab2.length -1 do
+            if (tab1[i] = tab2[j]) then
+                count += 1;
+            end-if
+        end-for
+        htab.insert(tab1[i],count);
+    end-for
+    
+    for j from 0 to tab2.length -1 do
+        count := 1;
+        for i from 0 to tab1.length -1 do
+            if (tab2[j] = tab1[i]) then
+                count += 1;
+            end-if
+        end-for
+        htab.insert(tab2[j],count);
+    end-for
 
-        // recherche des éléments distincts % tab 1 et tab 2 et faire la somme.
-    FOR i FROM 0 TO tab1.length -1 STEP 1  DO
-        found := FALSE;
-        FOR j FROM 0 TO tab2.length -1 STEP 1  DO
-            IF (tab1[i] = tab2[j]) THEN
-                found := TRUE ;
-            END_IF
-        END_FOR
-        IF (found = FALSE) THEN
-            sum := sum + tab1[i]
-        END_IF
-    END_FOR
+    for i from 0 to tab1.length -1 do
+        if (htab.get(tab1[i]) = 1) then
+            sum += tab1[i];
+        end-if
+    end-for
 
-    FOR j FROM 0 TO tab2.length -1 STEP 1  DO
-        found := FALSE;
-        FOR i FROM 0 TO tab1.length -1 STEP 1  DO
-            IF (tab2[j] = tab1[i]) THEN
-                found := TRUE ;
-            END_IF
-        END_FOR
-        IF (found = FALSE) THEN
-            sum := sum + tab2[j]
-        END_IF
-    END_FOR
+    for j from 0 to tab2.length -1 do
+        if (htab.get(tab2[j]) = 1) then
+            sum += tab2[j];
+        end-if
+    end-for
 
-        // affichage de la somme.
     Write ("The sum of all distinct elements = " , sum);
 
-END
+End

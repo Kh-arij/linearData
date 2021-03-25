@@ -1,57 +1,44 @@
 ALGORITHM problem2-solution2
-VAR
-    tab1 : ARRAY_OF INTEGER [20];
-    tab2 : ARRAY_OF INTEGER [20];
-    tab3 : ARRAY_OF INTEGER [20];
-    htab : HASH_TABLE<INTEGER,INTEGER>;
-    i , j , k , count , sum : INTEGER;
-BEGIN
-    sum := 0 ;    // initialisation de la valeur de la somme.
-
-        // remplissage du tableau 1.
-    FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+Var
+    tab1 : array-of integer [30];
+    tab2 : array-of integer [30];
+    tab3 : array-of integer [30];
+    htab : hash_table<integer,integer>;
+    i , j , k , count , sum : integer;
+Begin
+    sum := 0 ;   
+    for i from 0 to tab1.length -1 do
         Read (tab1[i]);
-    END_FOR
+    end-for
 
-        // remplissage du tableau 2.
-    FOR j FROM 0 TO tab2.length -1 STEP 1  DO
+    for j from 0 to tab2.length -1 do
         Read (tab2[j]);
-    END_FOR
+    end-for
 
-        // remplissage du hash table par les éléments dupliqués et distincts.
-    FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+    for i from 0 to tab1.length -1 do
         count := 1;
-        FOR j FROM 0 TO tab2.length -1 STEP 1  DO
-            IF (tab1[i] = tab2[j]) THEN
+        for j from 0 to tab2.length -1 do
+            if (tab1[i] = tab2[j]) then
                 count += 1;
-            END_IF
-        END_FOR
+            end-if
+        end-for
         htab.insert(tab1[i],count);
-    END_FOR
+    end-for
 
-    FOR j FROM 0 TO tab2.length -1 STEP 1  DO
+    for j from 0 to tab2.length -1 do
         count := 1;
-        FOR i FROM 0 TO tab1.length -1 STEP 1  DO
-            IF (tab2[j] = tab1[i]) THEN
+        for i from 0 to tab1.length -1 do
+            if (tab2[j] = tab1[i]) then
                 count += 1;
-            END_IF
-        END_FOR
+            end-if
+        end-for
         htab.insert(tab2[j],count);
-    END_FOR
-
-        // remplissage du tableau 3.
+    end-for
     tab3 : htabkeys() ;
-
-        // recherche des éléments qui apparuent 2 fois dans tab 1 et tab 2 (d'où vient le * 2)
-    FOR k FROM 0 TO tab3.length -1 STEP 1  DO
-        IF (htab.get(tab3[k]) = 2) THEN
+    for k from 0 to tab3.length -1 do
+        if (htab.get(tab3[k]) = 2) then
             sum += tab3[k]*2;
-        END_IF
-    END_FOR
-
-        // affichage de la somme.
+        end-if
+    end-for
     Write ("The sum of all common elements = " , sum );
-
-
-
 END

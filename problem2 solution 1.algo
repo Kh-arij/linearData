@@ -1,46 +1,41 @@
 ALGORITHM problem2-solution1
-VAR
-    tab1 : ARRAY_OF INTEGER [20];
-    tab2 : ARRAY_OF INTEGER [20];
-    i , j , sum : INTEGER;
-    found : BOOLEAN;
-BEGIN
-        // remplissage du tableau 1.
-    FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+Var
+    tab1 : array-of integer [30];
+    tab2 : array-of integer [30];
+    i , j , sum : integer;
+    aux : boolean;
+Begin
+    for i from 0 to tab1.length -1 do
         Read (tab1[i]);
-    END_FOR
+    end-for
 
-        // remplissage du tableau 2.
-    FOR j FROM 0 TO tab2.length -1 STEP 1  DO
+    for j from 0 to tab2.length -1 do
         Read (tab2[j]);
-    END_FOR
+    end-for
 
-        // recherche des éléments commun % tab 1 et tab 2 et faire la somme.
-    FOR i FROM 0 TO tab1.length -1 STEP 1  DO
-        found := FALSE;
-        FOR j FROM 0 TO tab2.length -1 STEP 1  DO
-            IF (tab1[i] = tab2[j]) THEN
-                found := TRUE ;
-            END_IF
-        END_FOR
-        IF (found = TRUE) THEN
+    for i from 0 to tab1.length -1 do
+        aux := false;
+        for j from 0 to tab2.length -1 do
+            if (tab1[i] = tab2[j]) then
+                aux := true ;
+            end-if
+        end-for
+        if (aux = true) then
             sum := sum + tab1[i]
-        END_IF
-    END_FOR
+        end-if
+    end-for
 
-    FOR j FROM 0 TO tab2.length -1 STEP 1  DO
-        found := FALSE;
-        FOR i FROM 0 TO tab1.length -1 STEP 1  DO
-            IF (tab2[j] = tab1[i]) THEN
-                found := TRUE ;
-            END_IF
-        END_FOR
-        IF (found = TRUE) THEN
+    for j from 0 to tab2.length -1 do
+        aux := false;
+        for i from 0 to tab1.length -1 do
+            if (tab2[j] = tab1[i]) then
+                aux := true ;
+            end-if
+        end-for
+        if (aux = true) then
             sum := sum + tab2[j]
-        END_IF
-    END_FOR
-
-        // affichage de la somme.
+        end-if
+end-for
     Write ("The sum of all common elements = " , sum);
 
-END
+End

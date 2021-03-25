@@ -1,31 +1,39 @@
-ALGORITHME problem1-solution1
-VAR
-    tab1: ARRAY_OF INTEGER [20];
-    tab2: ARRAY_OF INTEGER [20];
-    htab: HASH_TABLE <INTEGER, INTEGER>;
-    i, j, compte, somme: INTEGER;
-    
-COMMENCER
-    somme: = 0; // initialisation de la valeur de la somme.
+ALGORITHM problem1-solution1
+Var
+    tab1 : array_of integer [30];
+    tab2 : array_of integer [30];
+    i , j , sum : integer;
+    search: boolean;
+Begin
+    for i from 0 to tab1.length -1 do
+        Read (tab1[i]);
+    end-for
 
-        // remplissage du tableau 1.
-    POUR i DE 0 À tab1.length -1 ÉTAPE 1 FAIRE
-        Lire (tab1 [i]);
-    END_FOR
+    for j from 0 to tab2.length -1 do
+        Read (tab2[j]);
+end-for
+    for i from 0 to tab1.length -1 do
+        search := false;
+        for j from 0 to tab2.length -1 do
+            if (tab1[i] = tab2[j]) then
+                search := true ;
+            end-if
+        end-for
+        if (search = false) then
+            sum := sum + tab1[i]
+        end-if
+    end-for
 
-        // remplissage du tableau 2.
-    POUR j DE 0 À tab2.length -1 ÉTAPE 1 FAIRE
-        Lire (tab2 [j]);
-    END_FOR
-
-
-        // remplissage du tableau de hachage par les éléments dupliqués et distincts.
-    POUR i DE 0 À tab1.length -1 ÉTAPE 1 FAIRE
-        compte: = 1;
-        POUR j DE 0 À tab2.length -1 ÉTAPE 1 FAIRE
-            SI (tab1 [i] = tab2 [j]) ALORS
-                compter + = 1;
-            FIN SI
-        END_FOR
-        htab.insert (tab1 [i], nombre);
-    END_FOR
+    for j from 0 to tab2.length -1 do
+        search := false;
+        for i from 0 to tab1.length -1 do
+           if (tab2[j] = tab1[i]) then
+                search := true ;
+            end-if
+        end-for
+        if (search = false) then
+            sum := sum + tab2[j]
+        end-if
+    end-for
+    Write ("The sum of all distinct elements = " , sum);
+End
